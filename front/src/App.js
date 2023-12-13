@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { TextField, Button, List, ListItem, ListItemText, Checkbox } from '@mui/material';
-import Axios from 'axios'
 import './App.css';
 
 function App() {
