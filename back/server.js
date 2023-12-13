@@ -164,12 +164,14 @@ app.post('/api/todos/update/:id', async (req, res) => {
     const updateName = req.body.name;
 
     try {
-        const todo = await Todo.findByIdAndUpdate(todoId, { name: updateName }, { new: true });
-        if (todo) {
+        const todo = await Todo.findByIdAndUpdate( todoId , { name: updateName }, { new: true });
+        if (!todo) {
+            console.log(`Todo with ID ${todoId} not found.`);
+            res.status(404).send(`Item with the ID of ${todoId} not found.`);
+            return;
+        } else {
             console.log("Updated in the database", todo);
             res.redirect('/api/todos');
-        } else {
-            res.status(404).send(`Item with the ID of ${todoId} not found.`);
         }
     } catch (err) {
         console.error(err);
